@@ -1,6 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Siginin from "../pages/Siginin";
+import Siginin from "../pages/Auth/Siginin";
 
 const Stack = createNativeStackNavigator();
 
