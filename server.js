@@ -1,16 +1,24 @@
 const express = require("express");
 const cors = require("cors");
 const cookieSession = require("cookie-session");
+const formidableMiddleware = require('express-formidable');
+const bodyParser = require('body-parser');
+
+
 
 const dbConfig = require("./app/config/db.config");
 
 const app = express();
-
+app.use(formidableMiddleware());
 var corsOptions = {
-  origin: "http://localhost:8081"
+  origin: "http://localhost:8080"
 };
 
 app.use(cors(corsOptions));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded());
+// in latest body-parser use like below.
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // parse requests of content-type - application/json
 app.use(express.json());
@@ -49,6 +57,7 @@ app.get("/", (req, res) => {
 // routes
 require("./app/routes/auth.routes")(app);
 require("./app/routes/user.routes")(app);
+require("./app/routes/post.routes")(app);
 
 // set port, listen for requests
 const PORT = process.env.PORT || 8080;
